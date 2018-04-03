@@ -1,0 +1,52 @@
+<?php
+include('functions.php');//include all code from selected file
+$search = $_GET["search"];
+$con = connect(); // function wrtten in functions.php, log as a variable or you access the database an infinite number of times
+
+if (strlen($search)<=1){
+    echo "please enter more than one character";
+}
+else {
+
+$results = $con->query("SELECT * FROM products WHERE name LIKE '$search%'");
+$row = $results->fetch();
+
+// If $row is equal to the value "false", display an error
+if ($row == false) 
+{
+    echo "No matching rows!";
+}
+
+else
+{
+
+
+    while($row != false)
+    {
+        
+        echo "<p>";
+        echo "<input type='hidden' name='ID' value=".$row["ID"]."/>";
+        echo " Name: ".$row["name"]."<br/> ";
+        echo " Manufacturer: ".$row["manufacturer"]."<br/> " ; 
+        echo " Description: " .$row["description"]. "<br/>" ; 
+        echo " Price ".$row["price"]."<br/>" ; 
+        echo " Stock ".$row["stocklevel"]."<br/>" ;
+        echo "Age Resitriction <span id='agelimit".$row["ID"]."'>".$row["agelimit"]."</span><br/>";
+        echo "</p>";
+        echo "<label>Amount</label>";
+        echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
+        echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a>"; 
+        /*
+        echo "<a href='download.php?songID=".$row["ID"]."'>Download</a><br/>";
+        echo "<a href='https://www.youtube.com/results?search_query=".$row["artist"]." ".$row["title"]."'>Listen to the song on Youtube!</a> <br/>";
+        echo "<a href='order1.php?songID=".$row["ID"]."'>Order a copy</a>";
+        $row = $results->fetch();
+        */
+        $row = $results->fetch();
+    }
+}
+}
+//print_r($con->errorInfo()); //errorInfo() returns an array with three members
+                            //print_r() prints the entire contents of an array
+
+?>
