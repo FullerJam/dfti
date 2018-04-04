@@ -10,5 +10,5 @@ These were only in the working directory for reference.
 * make site secure against CSS (cross site script attacks)
 * Product rating functionality
 * program design report
-* add database query to rfb to update stock levels if an item is removed?
+* add database query to rfb to update stock levels if an item is removed? (add qty to onclick parameters)
 
