@@ -9,6 +9,7 @@
             else
             {
                 echo "You are logged in as ".$_SESSION["ssuser"]; 
+                
               ?>  
 
 <!DOCTYPE html>
@@ -106,7 +107,7 @@
   
     //remove from basket function
     function rfb(id){
-        //console.log(id);// uncomment to see if values are being passed through
+        //console.log(id);  //uncomment to see if values are being passed through
         var xhr2 = new XMLHttpRequest();
         xhr2.open('GET', 'removefb.php?ID='+id);
         xhr2.addEventListener ("load", responseAlert);
@@ -139,6 +140,7 @@
         <header>
             <h1>SOLENT GENERAL StORES</h1>
         </header>
+        <a href='#'>Admin Portal</a>
         </br>
         <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
         <div id="response"></div>
