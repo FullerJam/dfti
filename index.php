@@ -140,7 +140,7 @@
         <header>
             <h1>SOLENT GENERAL StORES</h1>
         </header>
-        <a href='#'>Admin Portal</a>
+        <a href='adminportal.php'>Admin Portal</a>
         </br>
         <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
         <div id="response"></div>

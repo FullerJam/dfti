@@ -1,26 +1,23 @@
 <?php
-session_start();
-// Test that the authentication session variable exists
 
-if (!isset ($_SESSION["ssuser"])){
-    header("refresh:5 url=login.html");
-    echo "You're not logged in.";
-}
-else if (!isset ($_SESSION["isadmin"])){
-    header("refresh:5 url=login.html");
-    echo "Area restricted, admin access only.";
-}
-   
-else{
+    include("functions.php");
+    $con = connect();
 
-?>
+    $prodname = $_POST["prodname"];
+    $manu = $_POST["manu"];
+    $desc = $_POST["desc"];
+    $price = $_POST["price"];
+    $stocklvl = $_POST["stocklvl"];
+    $ageres = $_POST["ageres"];
 
+    $insert=$con->query("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUE ('$prodname', '$manu', '$desc', '$price','$stocklvl','$ageres');");
+    $results=$insert->fetch();
+    
+    if ($insert){
+        echo"Product added to database";
+    }else{
+        echo "something went wrong";
+        echo $con->errorInfo()[2]; //2	Driver-specific error message. found on php.com
+    }
 
-
-
-
-
-
-<?php
-}
 ?>
