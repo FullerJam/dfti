@@ -84,7 +84,7 @@ else{
                 <h3>Add a product</h3>
             </div>
             <div class="form-container">
-                <form method="post" onsubmit="ajaxrequest()" id="prodform">
+                <form id="prodform">
                     <label>Product name</label>
                     <br/>
                     <input type="text" name="prodname" required>
