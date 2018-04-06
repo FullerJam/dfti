@@ -19,7 +19,7 @@ if ($row == false)
 
 else
 {
-
+    $i=0;
 
     while($row != false)
     {
@@ -33,7 +33,7 @@ else
         echo " Stock ".$row["stocklevel"]."<br/>" ;
         echo "Age Resitriction <span id='agelimit".$row["ID"]."'>".$row["agelimit"]."</span><br/>";
         echo "</p>";
-        echo "<label>Amount</label>";
+        echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
         echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a>"; 
         /*
@@ -43,7 +43,10 @@ else
         $row = $results->fetch();
         */
         $row = $results->fetch();
+        $i++; //increase the variable value by one each time the loop runs
     }
+    echo "</br></br>";
+    echo "<h4>Your search returned ".$i." result/results</h4>";
 }
 }
 //print_r($con->errorInfo()); //errorInfo() returns an array with three members

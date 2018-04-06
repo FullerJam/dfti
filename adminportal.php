@@ -31,28 +31,45 @@ else{
 
     </style>
     <script>
-         function ajaxrequest(){
-        // Create the XMLHttpRequest variable.
-        var xhr2 = new XMLHttpRequest();
-        // This variable represents the AJAX communication between client and
-        // server.
-        //var xhr2 = new XMLHttpRequest(); -- now declared globally, BIG MISTAKE, MULTIPLIED EVENTLISTENERS.. EVENT LISTERNS
-        // SHOULD BE DECLARED LOCALLY 
-        
-        // Specify the CALLBACK function. 
-        // When we get a response from the server, the callback function will run
-        xhr2.addEventListener ("load", responseReceived);
-        // Open the connection to the server
-        // We are sending a request to "flights.php" and passing in the 
-        // destination and date as a query string. 
-        xhr2.open('POST', 'addproduct.php');
-        // Send the request.
-        xhr2.send();
-    }
+    //https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript
+        window.addEventListener("load", function () {
 
-    function responseReceived(e){
-        document.getElementById('response').innerHTML = e.target.responseText;
-    }
+            function ajaxrequest(){
+                // Create the XMLHttpRequest variable.
+                var xhr2 = new XMLHttpRequest();
+                // This variable represents the AJAX communication between client and
+                // server.
+                // SHOULD BE DECLARED LOCALLY 
+                //var xhr2 = new XMLHttpRequest(); -- now declared globally, BIG MISTAKE, MULTIPLIED EVENTLISTENERS.. EVENT LISTERNS
+            
+                var FD = new FormData(form);
+
+                // Specify the CALLBACK function. 
+                // When we get a response from the server, the callback function will run
+                xhr2.addEventListener("load", responseReceived);
+
+                xhr2.addEventListener("error", function(event){
+                alert('Something went wrong');
+            });
+
+            // Open the connection to the server
+            xhr2.open('POST', 'addproduct.php');
+            // Send the request.
+            xhr2.send(FD);
+            }
+            //access form element
+            var form = document.getElementByID("prodform");
+
+            //prevent submits default action
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+            
+            sendData();
+            });
+        });
+        function responseReceived(e){
+            document.getElementById('response').innerHTML = e.target.responseText;
+        }
     </script>
 </head>
 <body>
@@ -66,26 +83,26 @@ else{
                 <h3>Add a product</h3>
             </div>
             <div class="form-container">
-                <form method="post" onsubmit="ajaxrequest()">
+                <form method="post" onsubmit="ajaxrequest()" id="prodform">
                     <label>Product name</label>
                     <br/>
-                    <input type="text" name="prodname">
+                    <input type="text" name="prodname" required>
                     <br/>
                     <label>Manufacturer</label>
                     <br/>
-                    <input type="text" name="manu">
+                    <input type="text" name="manu" required>
                     <br/>
                     <label>Description</label>
                     <br/>
-                    <input type="text" name="desc">
+                    <input type="text" name="desc" required>
                     <br/>
                     <label>Price</label>
                     <br/>
-                    <input type="number" name="price" step="any"><!-- step attribute 'any' allows decimal places -->
+                    <input type="number" name="price" step="any" required><!-- step attribute 'any' allows decimal places -->
                     <br/>
                     <label>Stock level</label>
                     <br/>
-                    <input type="number" name="stocklvl">
+                    <input type="number" name="stocklvl" required>
                     <br/>
                     <label>Age Restriction</label>
                     <select name="ageres" id="ageres">

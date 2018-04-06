@@ -37,10 +37,6 @@
         #link {
             float:right;
         }
-        #purchase{
-            float:right;
-            padding:10px;
-        }
         #search{
             margin:10px;
         }
