@@ -39,8 +39,8 @@ else{
                 var xhr2 = new XMLHttpRequest();
                 // This variable represents the AJAX communication between client and
                 // server.
-                // SHOULD BE DECLARED LOCALLY 
-                //var xhr2 = new XMLHttpRequest(); -- now declared globally, BIG MISTAKE, MULTIPLIED EVENTLISTENERS.. EVENT LISTERNS
+                
+                //var xhr2 = new XMLHttpRequest(); -- now declared globally, BIG MISTAKE, MULTIPLIED EVENTLISTENERS.. 
             
                 var FD = new FormData(form);
 
@@ -50,23 +50,24 @@ else{
 
                 xhr2.addEventListener("error", function(event){
                 alert('Something went wrong');
-            });
+                });
 
-            // Open the connection to the server
-            xhr2.open('POST', 'addproduct.php');
-            // Send the request.
-            xhr2.send(FD);
+                // Open the connection to the server
+                xhr2.open('POST', 'addproduct.php');
+                // Send the request.
+                xhr2.send(FD);
             }
             //access form element
-            var form = document.getElementByID("prodform");
+            var form = document.getElementById("prodform");
 
             //prevent submits default action
-            form.addEventListener("submit", function (event) {
+            form.addEventListener("submit", function(event){
                 event.preventDefault();
             
-            sendData();
+                ajaxrequest();
             });
         });
+        
         function responseReceived(e){
             document.getElementById('response').innerHTML = e.target.responseText;
         }
