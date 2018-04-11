@@ -1,6 +1,6 @@
 <?php
 session_start();
-$id = htmlentities($_GET["ID"]);
+$id = $_GET["ID"];
 $u = $_SESSION["ssuser"]; 
 $totalprice=0;
 $qtyprice=0;
@@ -47,7 +47,7 @@ else
         echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
         echo " Quantity: " .$row["qty"]. "<br/>" ;  
         echo " Item total: ".$qtyprice.".<br/>";
-        echo "<a href='#' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; 
+        echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; 
         
     
         $row = $results->fetch();

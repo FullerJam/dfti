@@ -2,9 +2,9 @@
 // If anything in while loop is changed, it may need to be changed
 // in removefb.php & basketonload.php aswell.
 session_start();
-$id = htmlentities($_GET["ID"]);
-$qty = htmlentities($_GET["qty"]);
-$agelimit = htmlentities($_GET["agelimit"]);
+$id = $_GET["ID"];
+$qty = $_GET["qty"];
+$agelimit = $_GET["agelimit"];
 $u = $_SESSION["ssuser"]; 
 $totalprice=0;
 $qtyprice=0;
@@ -24,9 +24,9 @@ if ($agelimit>0){
     $month=$row0["monthofbirth"];
     $year=$row0["yearofbirth"];
 
-    $birthday = mktime(0,0,0,$month,$day,$year);
-    $difference = time() - $birthday;
-    $age = floor($difference / 31556926); // floor removes decimal places
+    $birthday = mktime(0,0,0,$month,$day,$year); // converts date to seconds
+    $difference = time() - $birthday; // different inbetween current time/date stamp and $birthday 
+    $age = floor($difference / 31556926); // calculates age of difference value by dividing by number of seconds in a year, floor removes decimal places
     
     if($age < $agelimit){
         echo "You are below the required age to purchase this product";
@@ -73,7 +73,7 @@ if ($agelimit>0){
                     echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                     echo " Quantity: " .$row["qty"]. "<br/>" ;  
                     echo " Item total: ".$qtyprice."<br/>";
-                    echo "<a href='#' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; 
+                    echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; //onclick="doSomething();doSomethingElse();"
                     
                 
                     $row = $results->fetch();
@@ -124,7 +124,7 @@ if ($agelimit == 0){
                     echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                     echo " Quantity: " .$row["qty"]. "<br/>";  
                     echo " Item total: ".$qtyprice."<br/>";
-                    echo "<a href='#' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; 
+                    echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; 
                     
                 
                     $row = $results->fetch();

@@ -157,7 +157,9 @@
         </header>
         <a href='adminportal.php'>Admin Portal</a><br>
         <a href="#" onclick="showShelves()">Show all products</a><br>
-        <a href="#" onclick="hideShelves()">Hide products</a>
+        <a href="#" onclick="hideShelves()">Hide products</a><br>
+        <a href="logout.php">Logout</a><br>
+        <a href="#" onclick="ajaxrequest()">Refresh search results</a>
         </br>
         <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
         <div id="shelves"></div>
