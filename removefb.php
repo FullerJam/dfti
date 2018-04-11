@@ -1,6 +1,6 @@
 <?php
 session_start();
-$id = $_GET["ID"] ;
+$id = htmlentities($_GET["ID"]);
 $u = $_SESSION["ssuser"]; 
 $totalprice=0;
 $qtyprice=0;

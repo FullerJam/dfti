@@ -2,9 +2,9 @@
 // If anything in while loop is changed, it may need to be changed
 // in removefb.php & basketonload.php aswell.
 session_start();
-$id = $_GET["ID"] ;
-$qty = $_GET["qty"];
-$agelimit = $_GET["agelimit"];
+$id = htmlentities($_GET["ID"]);
+$qty = htmlentities($_GET["qty"]);
+$agelimit = htmlentities($_GET["agelimit"]);
 $u = $_SESSION["ssuser"]; 
 $totalprice=0;
 $qtyprice=0;

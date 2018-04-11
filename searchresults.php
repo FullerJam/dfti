@@ -1,6 +1,6 @@
 <?php
 include('functions.php');//include all code from selected file
-$search = $_GET["search"];
+$search = htmlentities($_GET["search"]);
 $con = connect(); // function wrtten in functions.php, log as a variable or you access the database an infinite number of times
 
 if (strlen($search)<=1){
