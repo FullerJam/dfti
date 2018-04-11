@@ -2,9 +2,10 @@
 session_start();
 // Test that the authentication session variable exists
 
-if ($_SESSION["isadmin"] = 0){
-    header("refresh:5 url=login.html");
+if ($_SESSION["isadmin"] == 0){ //had to be == not sure why, research.
+    header("refresh:4 url=index.html");
     echo "Area restricted, admin access only.";
+    echo "<h5><a href='index.php'>Back to store</a></h5>";
 }
    
 else{

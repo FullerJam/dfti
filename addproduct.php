@@ -3,12 +3,12 @@
     include("functions.php");
     $con = connect();
 
-    $prodname = $_POST["prodname"];
-    $manu = $_POST["manu"];
-    $desc = $_POST["desc"];
-    $price = $_POST["price"];
-    $stocklvl = $_POST["stocklvl"];
-    $ageres = $_POST["ageres"];
+    $prodname = htmlentities($_POST["prodname"]); //$variable=htmlentities($_GET[""]);
+    $manu = htmlentities($_POST["manu"]);
+    $desc = htmlentities($_POST["desc"]);
+    $price = htmlentities($_POST["price"]);
+    $stocklvl = htmlentities($_POST["stocklvl"]);
+    $ageres = htmlentities($_POST["ageres"]);
 
     $insert=$con->query("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUE ('$prodname', '$manu', '$desc', '$price','$stocklvl','$ageres');");
     $results=$insert->fetch();
