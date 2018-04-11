@@ -37,6 +37,7 @@ if ($agelimit>0){
         $stocklevel=$con->query("SELECT stocklevel FROM products WHERE ID='$id'");
         $row=$stocklevel->fetch();
 
+        if ($qty>$row["stocklevel"]){
             echo "Not enough stock to satisfy your order, ".$row["stocklevel"]." items left in stock.";
         }else{
             //minus qty requested from stock

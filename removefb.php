@@ -7,12 +7,20 @@ $qtyprice=0;
 
 include("functions.php");
 $con = connect();
-
+$qtyArray=$con->query("SELECT * FROM basket WHERE ID='$id'");
+$qtyRow=$qtyArray->fetch();
+$qty=$qtyRow["qty"];
+$productID=$qtyRow["productID"]; //for basket update, add a product
 //cannot be delete * FROM, has to be DELETE FROM
 $con->query("DELETE FROM basket WHERE ID='$id'");
 
+//refresh basket for user
 $results=$con->query("SELECT * FROM basket WHERE username='$u'");
 $row = $results->fetch();
+
+
+//have to link qty to 
+$con->query("UPDATE products SET stocklevel=stocklevel+'$qty' WHERE ID='$productID'");
 
 if ($row == false) 
 {

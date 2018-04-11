@@ -38,8 +38,14 @@
             float:right;
         }
         #search{
-            margin:10px;
+            margin:20px 0 20px 0;
         }
+        #shelves{
+            margin:5px 0 5px 0;
+            background-color: #ff69b4;
+            width:500px;
+        }
+        
         
     </style>
     <script type='text/javascript'>
@@ -61,12 +67,23 @@
         // We are sending a request to "flights.php" and passing in the 
         // destination and date as a query string. 
         xhr2.open('GET', 'searchresults.php?search='+search);
-    
+        
         // Send the request.
         xhr2.send();
     }
 
-     function basketOnLoad(){
+    function showShelves(){
+        document.getElementById("shelves").style.display='block';
+        var xhr2 = new XMLHttpRequest();
+        xhr2.addEventListener("load", responseShelves);
+        xhr2.open('GET', 'shelves.php');
+        xhr2.send();
+    }
+    function hideShelves(){
+        document.getElementById("shelves").style.display='none';
+    }
+
+    function basketOnLoad(){
         // Create the XMLHttpRequest variable.
         var xhr2 = new XMLHttpRequest();
         // This variable represents the AJAX communication between client and
@@ -82,7 +99,6 @@
         // We are sending a request to "flights.php" and passing in the 
         // destination and date as a query string. 
         xhr2.open('GET', 'basketonload.php');
-    
         // Send the request.
         xhr2.send();
     }
@@ -125,6 +141,9 @@
     function responseAlert(e){
         document.getElementById('basket').innerHTML = e.target.responseText;
     }
+    function responseShelves(e){
+        document.getElementById('shelves').innerHTML = e.target.responseText;
+    }
 
     </script>
 </head>
@@ -134,11 +153,14 @@
     <div class="wrapper">
 
         <header>
-            <h1>SOLENT GENERAL StORES</h1>
+            <h1>SOLENT GENERAL ST0RES</h1>
         </header>
-        <a href='adminportal.php'>Admin Portal</a>
+        <a href='adminportal.php'>Admin Portal</a><br>
+        <a href="#" onclick="showShelves()">Show all products</a><br>
+        <a href="#" onclick="hideShelves()">Hide products</a>
         </br>
         <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
+        <div id="shelves"></div>
         <div id="response"></div>
         <h2>Basket</h2>
         <div id="basket"></div>

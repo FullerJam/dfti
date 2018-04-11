@@ -4,7 +4,7 @@ $search = $_GET["search"];
 $con = connect(); // function wrtten in functions.php, log as a variable or you access the database an infinite number of times
 
 if (strlen($search)<=1){
-    echo "please enter more than one character";
+    echo "Please enter more than one character";
 }
 else {
 
@@ -45,7 +45,6 @@ else
         $row = $results->fetch();
         $i++; //increase the variable value by one each time the loop runs
     }
-    echo "</br></br>";
     echo "<h4>Your search returned ".$i." result/results</h4>";
 }
 }

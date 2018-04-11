@@ -14,7 +14,21 @@
     $results=$insert->fetch();
     
     if ($insert){
-        echo"Product added to database";
+        echo"<h4>Product added to database</h4>";
+
+        $newprod=$con->query("SELECT * FROM products WHERE name='$prodname'");
+        $row=$newprod->fetch();
+
+        echo "<p>";
+        echo " Product ID: ".$row["ID"]."<br/>";
+        echo " Product: ".$row["name"]."<br/> ";
+        echo " Manufacturer: ".$row["manufacturer"]."<br/> ";
+        echo " Description: ".$row["description"]."<br/> ";
+        echo " Price: ".$row["price"]."<br/> ";
+        echo " Age restriction: ".$row["agelimit"]."<br/> "; 
+        echo "</p>";
+        
+
     }else{
         echo "something went wrong";
         echo $con->errorInfo()[2]; //2	Driver-specific error message. found on php.com

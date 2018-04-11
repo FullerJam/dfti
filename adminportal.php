@@ -117,9 +117,11 @@ else{
                 </form>
             </div> <!-- form-container end -->
         </div> <!-- container end -->
+        <div id="response"></div> <!-- where ajax response will be shown -->
+        <h5><a href="index.php">Back to store</a></h5>
     </div> <!-- wrapper end -->
 
-<div id="response"></div>
+
 
 </body>
 </html>
