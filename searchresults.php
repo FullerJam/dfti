@@ -35,7 +35,7 @@ else
         echo "</p>";
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
-        echo "<a href='#' onclick='atb(".$row["ID"].");ajaxrequest();'>Add to Basket</a>";  // call ajax request to refresh search results
+        echo "<a href='#' onclick='atb(".$row["ID"].");setTimeout(function() {ajaxrequest()}, 1000);'>Add to Basket</a>";  // refreshs searchresults after 1s, I imagine this is bad practice but it works
         /*
         echo "<a href='download.php?songID=".$row["ID"]."'>Download</a><br/>";
         echo "<a href='https://www.youtube.com/results?search_query=".$row["artist"]." ".$row["title"]."'>Listen to the song on Youtube!</a> <br/>";

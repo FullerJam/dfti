@@ -39,16 +39,46 @@
         }
         #search{
             margin:20px 0 20px 0;
+            display:block;
         }
         #shelves{
             margin:5px 0 5px 0;
             background-color: #ff69b4;
             width:500px;
         }
-        
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            float: left;
+        }
+
+
+        li a {
+            display: block;
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            background-color: #b2ffaf;
+        }
+
+        li a:hover{
+            color: #ff69b4;
+        }
+
+        li a:first-of-type {
+            padding-left: 5px;
+        }
+
+        li a:last-of-type {
+            padding-right: 5px;            
+        }
         
     </style>
     <script type='text/javascript'>
+
 
     function ajaxrequest(){
         // Create the XMLHttpRequest variable.
@@ -155,12 +185,17 @@
         <header>
             <h1>SOLENT GENERAL ST0RES</h1>
         </header>
-        <a href='adminportal.php'>Admin Portal</a><br>
-        <a href="#" onclick="showShelves()">Show all products</a><br>
-        <a href="#" onclick="hideShelves()">Hide products</a><br>
-        <a href="logout.php">Logout</a><br>
-        <a href="#" onclick="ajaxrequest()">Refresh search results</a>
-        </br>
+
+        <nav>
+            <ul>
+                <li><a href='adminportal.php'>Admin portal</a></li>
+                <li><a href="#" onclick="showShelves()">Show all products</a></li>
+                <li><a href="#" onclick="hideShelves()">Hide products</a></li>
+                <li><a href="#" onclick="ajaxrequest()">Refresh results</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <br><br>
         <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
         <div id="shelves"></div>
         <div id="response"></div>

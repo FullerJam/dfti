@@ -124,7 +124,7 @@ if ($agelimit == 0){
                     echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                     echo " Quantity: " .$row["qty"]. "<br/>";  
                     echo " Item total: ".$qtyprice."<br/>";
-                    echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; 
+                    echo "<a href='#' onclick='rfb(".$row["ID"].");setTimeout(function() {ajaxrequest()}, 1000);'>Remove from basket</a>"; // refreshs search results after 1s, I imagine this is bad practice but it works
                     
                 
                     $row = $results->fetch();
