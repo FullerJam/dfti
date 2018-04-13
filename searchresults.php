@@ -43,11 +43,11 @@ else
         echo "<fieldset class='rating'>
               <legend>Rate this product</legend>
               <input type='hidden' value=".$row["ID"].">
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='1'/><label>1☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='2'/><label>2☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='3'/><label>3☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='3'/><label>4☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='5'/><label>5☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'value='1'/><label>1☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2)'value='2'/><label>2☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3)'value='3'/><label>3☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4)'value='3'/><label>4☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5)'value='5'/><label>5☆</label>
               </fieldset>";
         echo "</form>";        
         echo "<label>Amount </label>";
@@ -61,7 +61,7 @@ else
     echo "<h4>Your search returned ".$i." result/results</h4>"; // feedback information from variable
 }
 }
-//print_r($con->errorInfo()); //errorInfo() returns an array with three members
+//print_r($con->errorInfo()); //errorInfo() returns an array
 //print_r() prints the entire contents of an array
 
 //https://dev.mysql.com/doc/refman/5.7/en/insert-on-duplicate.html
