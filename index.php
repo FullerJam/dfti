@@ -204,10 +204,9 @@
   function sendRating(id,rating) {
             console.log(id,rating);
             var xhr2 = new XMLHttpRequest();
-            xhr2.addEventListener ("load",responseRecieved);
-            xhr2.open('POST', 'ratings.php?rating='+rating+'&id='+id);
+            xhr2.addEventListener ("load", responseReceived);
+            xhr2.open('GET', 'ratings.php?rating='+rating+'&ID='+id);
             xhr2.send();
-        
     }
 
     // The callback function

@@ -42,13 +42,13 @@ else
         echo "<form>";
         echo "<fieldset class='rating'>
               <legend>Rate this product</legend>
-              <input type='hidden' value=".$row["ID"].">
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'value='1'/><label>1☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2)'value='2'/><label>2☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3)'value='3'/><label>3☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4)'value='3'/><label>4☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5)'value='5'/><label>5☆</label>
-              </fieldset>";
+              <input type='hidden' value=".$row["ID"]."> 
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1);setTimeout(function() {ajaxrequest()}, 1000);'value='1'/><label>1☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2);setTimeout(function() {ajaxrequest()}, 1000);'value='2'/><label>2☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3);setTimeout(function() {ajaxrequest()}, 1000);'value='3'/><label>3☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4);setTimeout(function() {ajaxrequest()}, 1000);'value='3'/><label>4☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5);setTimeout(function() {ajaxrequest()}, 1000);'value='5'/><label>5☆</label>
+              </fieldset>";// had to use setTimeout(function() {ajaxrequest()}, 1000); so as not to cause infinite loop to refresh
         echo "</form>";        
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
