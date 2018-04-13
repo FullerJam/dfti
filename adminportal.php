@@ -77,7 +77,7 @@ else{
 <body>
     
     <div id="wrapper">
-        <h1>Welcome to the admin portal</h1>
+        <h1>ADMIN PORTAL</h1>
         
         <title>Add new product</title>
         <div class="container">

@@ -20,10 +20,15 @@ if ($row == false)
 else
 {
     $i=0;
-
+    
+    $a=1;
+    $b=2;
+    $c=3;
+    $d=4;
+    $e=5;
     while($row != false)
     {
-        
+        $i++; //increase the variable value by one each time the loop runs, for search result query and form
         echo "<p>";
         echo "<input type='hidden' name='ID' value=".$row["ID"]."/>";
         echo " Name: ".$row["name"]."<br/> ";
@@ -31,24 +36,36 @@ else
         echo " Description: " .$row["description"]. "<br/>" ; 
         echo " Price ".$row["price"]."<br/>" ; 
         echo " Stock ".$row["stocklevel"]."<br/>" ;
+        echo " Avg Rating <br>";//add rating
         echo "Age Resitriction <span id='agelimit".$row["ID"]."'>".$row["agelimit"]."</span><br/>";
         echo "</p>";
+        echo "<form>";
+        echo "<fieldset class='rating'>
+              <legend>Rate this product</legend>
+              <input type='hidden' value=".$row["ID"].">
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='1'/><label>1☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='2'/><label>2☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='3'/><label>3☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='3'/><label>4☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].")'value='5'/><label>5☆</label>
+              </fieldset>";
+        echo "</form>";        
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
-        echo "<a href='#' onclick='atb(".$row["ID"].");setTimeout(function() {ajaxrequest()}, 1000);'>Add to Basket</a>";  // refreshs searchresults after 1s, I imagine this is bad practice but it works
-        /*
-        echo "<a href='download.php?songID=".$row["ID"]."'>Download</a><br/>";
-        echo "<a href='https://www.youtube.com/results?search_query=".$row["artist"]." ".$row["title"]."'>Listen to the song on Youtube!</a> <br/>";
-        echo "<a href='order1.php?songID=".$row["ID"]."'>Order a copy</a>";
+        echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a><br>";  // refreshs searchresults after 1s, I imagine this is bad practice but it works
+        
+        //'showproduct("variable1","variable2")'
         $row = $results->fetch();
-        */
-        $row = $results->fetch();
-        $i++; //increase the variable value by one each time the loop runs
+       
     }
-    echo "<h4>Your search returned ".$i." result/results</h4>";
+    echo "<h4>Your search returned ".$i." result/results</h4>"; // feedback information from variable
 }
 }
 //print_r($con->errorInfo()); //errorInfo() returns an array with three members
-                            //print_r() prints the entire contents of an array
+//print_r() prints the entire contents of an array
+
+//https://dev.mysql.com/doc/refman/5.7/en/insert-on-duplicate.html
+
+//$con->query()("INSERT INTO userratings (username,productID,userRating) VALUES (1,2,3) ON DUPLICATE KEY UPDATE userRating"); 
 
 ?>

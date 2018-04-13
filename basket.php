@@ -73,7 +73,7 @@ if ($agelimit>0){
                     echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                     echo " Quantity: " .$row["qty"]. "<br/>" ;  
                     echo " Item total: ".$qtyprice."<br/>";
-                    echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; //onclick="doSomething();doSomethingElse();"
+                    echo "<a href='#' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; //onclick="doSomething();doSomethingElse();"
                     
                 
                     $row = $results->fetch();
