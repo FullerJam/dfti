@@ -7,8 +7,10 @@ if (strlen($search)<=1){ //checks string length is more than or equal to 1
     echo "Please enter more than one character";
 }
 else {
-
-$results = $con->query("SELECT * FROM products WHERE name LIKE '$search%'"); // delivers all results similar to the string so far using wildcard %
+$searchbp="$search%";//converts varibale for use in bind param
+$results = $con->prepare("SELECT * FROM products WHERE name LIKE ?"); // delivers all results similar to the string so far using wildcard %
+$results->bindParam(1,$searchbp);
+$results->execute();
 $row = $results->fetch();
 
 // If $row is equal to the value "false", display an error
@@ -25,7 +27,10 @@ else
     
     while($row != false)
     {
-        $results2=$con->query("SELECT * FROM products WHERE id=".$row["ID"]."");
+        $results2=$con->prepare("SELECT * FROM products WHERE id=?");
+        $results2->bindParam(1,$row["ID"]);
+        $results2->execute();
+        
         $row2=$results2->fetch();
         
         $av=$row2["av_raters"];

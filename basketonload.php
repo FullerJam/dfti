@@ -8,8 +8,10 @@ $con = connect(); // function wrtten in functions.php, log as a variable or you 
 $totalprice=0;
 $qtyprice=0; 
 
-$results=$con->query("SELECT * FROM basket WHERE username='$u'");
-        $row = $results->fetch();
+$results=$con->prepare("SELECT * FROM basket WHERE username=?");
+$results->bindParam(1,$u);
+$results->execute();
+$row = $results->fetch();
 
         if ($row == false){
             echo "No items in basket!";

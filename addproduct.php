@@ -10,13 +10,22 @@
     $stocklvl = htmlentities($_POST["stocklvl"]);
     $ageres = htmlentities($_POST["ageres"]);
 
-    $insert=$con->query("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUE ('$prodname', '$manu', '$desc', '$price','$stocklvl','$ageres');");
+    $insert=$con->prepare("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUE (?, ?, ?, ?, ?, ?);");
+    $insert->bindParam(1,$prodname);
+    $insert->bindParam(2,$manu);
+    $insert->bindParam(3,$desc);
+    $insert->bindParam(4,$price);
+    $insert->bindParam(5,$stocklvl);
+    $insert->bindParam(6,$ageres);
+    $insert->execute();
     $results=$insert->fetch();
     
     if ($insert){
         echo"<h4>Product added to database</h4>";
 
-        $newprod=$con->query("SELECT * FROM products WHERE name='$prodname'");
+        $newprod=$con->prepare("SELECT * FROM products WHERE name=?");
+        $newprod->bindParam(1,$prodname);
+        $newprod->execute();
         $row=$newprod->fetch();
 
         echo "<p>";

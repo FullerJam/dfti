@@ -15,8 +15,11 @@ $con = connect();
 
 if ($agelimit>0){
 
-    $results0=$con->query("SELECT dayofbirth, monthofbirth ,yearofbirth FROM users WHERE username='$u'");
+    $results0=$con->prepare("SELECT dayofbirth, monthofbirth ,yearofbirth FROM users WHERE username=?");
     //$results0=$con->query("SELECT (CURDATE()-(dayofbirth, monthofbirth ,yearofbirth)) FROM users WHERE username='$u'");
+    $results0->bindParam(1,$u);
+    $results->execute();
+
     $row0=$results0->fetch();
 
 
@@ -34,19 +37,31 @@ if ($agelimit>0){
     }else{
 
         //access stocklevel from database and store in var
-        $stocklevel=$con->query("SELECT stocklevel FROM products WHERE ID='$id'");
+        $stocklevel=$con->prepare("SELECT stocklevel FROM products WHERE ID=?");
+        $stocklevel->bindParam(1,$id);
+        $stocklevel->execute();
+
         $row=$stocklevel->fetch();
 
         if ($qty>$row["stocklevel"]){
             echo "Not enough stock to satisfy your order, ".$row["stocklevel"]." items left in stock.";
         }else{
             //minus qty requested from stock
-            $con->query("UPDATE products SET stocklevel=stocklevel-'$qty' WHERE ID='$id'");
+            $minusq=$con->prepare("UPDATE products SET stocklevel=stocklevel-? WHERE ID=?");
+            $minusq->bindParam(1,$qty);
+            $minusq->bindParam(2,$id);
+            $minusq->execute();
             //insert order to basket    
-            $con->query("INSERT INTO basket (productID, username, qty) VALUE ('$id','$u','$qty')");
-            
+            $insorder=$con->prepare("INSERT INTO basket (productID, username, qty) VALUE (?,?,?)");
+            $insorder->bindParam(1,$id);
+            $insorder->bindParam(2,$u);
+            $insorder->bindParam(3,$qty);
+            $insorder->execute();
             //select contents of basket
-            $results=$con->query("SELECT * FROM basket WHERE username='$u'");
+            $results=$con->prepare("SELECT * FROM basket WHERE username=?");
+            $results->bindParam(1,$u);
+            $results->execute();
+            
             //fetch results from array
             $row = $results->fetch();
 
@@ -57,7 +72,9 @@ if ($agelimit>0){
                 while($row != false)
                 {
                     
-                $results2=$con->query("SELECT * FROM products WHERE ID='".$row["productID"]."'");
+                $results2=$con->prepare("SELECT * FROM products WHERE ID=?");
+                $results2->bindParam(1,$row["productID"]);
+                $results2->execute();
                 $row2 = $results2->fetch();
 
 
@@ -86,18 +103,32 @@ if ($agelimit>0){
     }
 }
 if ($agelimit == 0){
-        $stocklevel=$con->query("SELECT stocklevel FROM products WHERE ID='$id'");
+        $stocklevel=$con->prepare("SELECT stocklevel FROM products WHERE ID=?");
+        $stocklevel->bindParam(1,$id);
+        $stocklevel->execute();
+
         $row=$stocklevel->fetch();
 
         if ($qty>$row["stocklevel"]){
             echo "Not enough stock to satisfy your order, ".$row["stocklevel"]." items left in stock.";
         }else{
             //minus qty requested from stock
-            $con->query("UPDATE products SET stocklevel=stocklevel-'$qty' WHERE ID='$id'");
+            $minusqty2=$con->prepare("UPDATE products SET stocklevel=stocklevel-? WHERE ID=?");
+            $minusqty2->bindParam(1,$qty);
+            $minusqty2->bindParam(2,$id);
+            $minusqty2->execute();
             //insert order to basket                   
-            $con->query("INSERT INTO basket (productID, username, qty) VALUE ('$id','$u','$qty')");
+            $insorder2=$con->prepare("INSERT INTO basket (productID, username, qty) VALUE (?,?,?)");
+            $insorder2->bindParam(1,$id);
+            $insorder2->bindParam(2,$u);
+            $insorder2->bindParam(3,$qty);
+            $insorder2->execute();
 
-            $results=$con->query("SELECT * FROM basket WHERE username='$u'");
+            $results=$con->prepare("SELECT * FROM basket WHERE username=?");
+            $results->bindParam(1,$u);
+            $results->execute();
+                
+            
             $row = $results->fetch();
 
             if ($row == false){
@@ -110,7 +141,10 @@ if ($agelimit == 0){
                 while($row != false)
                 {
                     
-                $results2=$con->query("SELECT * FROM products WHERE ID='".$row["productID"]."'");
+                $results2=$con->prepare("SELECT * FROM products WHERE ID=?");
+                $results2->bindParam(1,$row["productID"]);
+                $results2->execute();
+
                 $row2 = $results2->fetch();
 
                 $qtyprice = $row2["price"] * $row["qty"];

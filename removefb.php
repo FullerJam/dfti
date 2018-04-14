@@ -7,20 +7,30 @@ $qtyprice=0;
 
 include("functions.php");
 $con = connect();
-$qtyArray=$con->query("SELECT * FROM basket WHERE ID='$id'");
+$qtyArray=$con->prepare("SELECT * FROM basket WHERE ID=?");
+$qtyArray->bindParam(1,$id);
+$qtyArray->execute();
+
 $qtyRow=$qtyArray->fetch();
 $qty=$qtyRow["qty"];
 $productID=$qtyRow["productID"]; //for basket update, add a product
-//cannot be delete * FROM, has to be DELETE FROM
-$con->query("DELETE FROM basket WHERE ID='$id'");
 
+//cannot be delete * FROM, has to be DELETE FROM
+$rfb=$con->prepare("DELETE FROM basket WHERE ID=?");
+$rfb->bindParam(1,$id);
+$rfb->execute();
 //refresh basket for user
-$results=$con->query("SELECT * FROM basket WHERE username='$u'");
+$results=$con->prepare("SELECT * FROM basket WHERE username=?");
+$results->bindParam(1,$u);
+$results->execute();
 $row = $results->fetch();
 
 
-//have to link qty to 
-$con->query("UPDATE products SET stocklevel=stocklevel+'$qty' WHERE ID='$productID'");
+//update stocklevels when removed from basket 
+$updatestock=$con->prepare("UPDATE products SET stocklevel=stocklevel+? WHERE ID=?");
+$updatestock->bindParam(1,$qty);
+$updatestock->bindParam(2,$productID);
+$updatestock->execute();
 
 if ($row == false) 
 {
@@ -33,7 +43,10 @@ else
     while($row != false)
     {
             
-        $results2=$con->query("SELECT * FROM products WHERE ID='".$row["productID"]."'");
+        $results2=$con->prepare("SELECT * FROM products WHERE ID=?");
+        $results2->bindParam(1,$row["productID"]);
+        $results2->execute();
+        
         $row2 = $results2->fetch();
 
         $qtyprice = $row2["price"] * $row["qty"];

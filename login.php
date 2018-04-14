@@ -12,8 +12,12 @@ $password = htmlentities($_POST["password"]);
 $con = connect();
 
 
-$result=$con->query("SELECT * FROM users WHERE username='$username' AND password='$password'");
+$result=$con->prepare("SELECT * FROM users WHERE username=? AND password=?");
+$result->bindParam(1,$username);
+$result->bindParam(2,$password);
+$result->execute();
 $row=$result->fetch();
+
 if($row==false)
 {
 	echo "Incorrect username/password!";
