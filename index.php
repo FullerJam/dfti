@@ -3,7 +3,7 @@
             // Test that the authentication session variable exists
             if ( !isset ($_SESSION["ssuser"]))
             {
-                header( "refresh:5;url=login.html" );
+                header( "refresh:3;url=login.html" );
                 echo "You're not logged in. Go away!";
             }
             else
@@ -23,6 +23,10 @@
         body { 
             font-family: Calibri, DejaVu Sans, sans-serif; 
             }
+
+        #stars{
+            color:#a17f1a;
+        }
 
         #response { 
             background-color: #b2ffaf;
@@ -204,7 +208,7 @@
   function sendRating(id,rating) {
             console.log(id,rating);
             var xhr2 = new XMLHttpRequest();
-            xhr2.addEventListener ("load", responseReceived);
+            xhr2.addEventListener ("load", responseRating);
             xhr2.open('GET', 'ratings.php?rating='+rating+'&ID='+id);
             xhr2.send();
     }
@@ -219,10 +223,15 @@
     function responseReceived(e){
         document.getElementById('response').innerHTML = e.target.responseText;
     }
+    function responseRating(e){
+        document.getElementById('response').innerHTML = e.target.responseText;
+        ajaxrequest();
+    }
     function responseAlert(e){
         document.getElementById('basket').innerHTML = e.target.responseText;
         ajaxrequest();
     }
+    
     function responseShelves(e){
         document.getElementById('shelves').innerHTML = e.target.responseText;
     }

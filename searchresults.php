@@ -19,40 +19,60 @@ if ($row == false)
 
 else
 {
-    $i=0;
+   
     
-    $a=1;
-    $b=2;
-    $c=3;
-    $d=4;
-    $e=5;
+    $i=0; // no# of search results feedback query 
+    
     while($row != false)
     {
+        $results2=$con->query("SELECT * FROM products WHERE id=".$row["ID"]."");
+        $row2=$results2->fetch();
+        
+        $av=$row2["av_raters"];
+        if ($av<1){
+            $stars="No current rating";
+        }
+        else if($av>=1 && $av <=1.99){
+            $stars="★";
+        }
+        else if($av>=2 && $av <=2.99){
+            $stars="★★";
+        }
+        else if($av>=3 && $av <=3.99){
+            $stars="★★★";
+        }
+        else if($av>=4 && $av <=4.99){
+            $stars="★★★★";
+        }
+        else if($av>=5){
+            $stars="★★★★★";
+        }
+
         $i++; //increase the variable value by one each time the loop runs, for search result query and form
         echo "<p>";
         echo "<input type='hidden' name='ID' value=".$row["ID"]."/>";
         echo " Name: ".$row["name"]."<br/> ";
-        echo " Manufacturer: ".$row["manufacturer"]."<br/> " ; 
-        echo " Description: " .$row["description"]. "<br/>" ; 
-        echo " Price ".$row["price"]."<br/>" ; 
-        echo " Stock ".$row["stocklevel"]."<br/>" ;
-        echo " Avg Rating <br>";//add rating
+        echo " Manufacturer: ".$row["manufacturer"]."<br/> "; 
+        echo " Description: " .$row["description"]. "<br/>"; 
+        echo " Price: ".$row["price"]."<br/>"; 
+        echo " Stock: ".$row["stocklevel"]."<br/>";
+        echo " Avg Rating: <span id='stars'>".$stars."</span><br>";//add rating
         echo "Age Resitriction <span id='agelimit".$row["ID"]."'>".$row["agelimit"]."</span><br/>";
         echo "</p>";
         echo "<form>";
         echo "<fieldset class='rating'>
               <legend>Rate this product</legend>
               <input type='hidden' value=".$row["ID"]."> 
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1);setTimeout(function() {ajaxrequest()}, 1000);'value='1'/><label>1☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2);setTimeout(function() {ajaxrequest()}, 1000);'value='2'/><label>2☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3);setTimeout(function() {ajaxrequest()}, 1000);'value='3'/><label>3☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4);setTimeout(function() {ajaxrequest()}, 1000);'value='3'/><label>4☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5);setTimeout(function() {ajaxrequest()}, 1000);'value='5'/><label>5☆</label>
-              </fieldset>";// had to use setTimeout(function() {ajaxrequest()}, 1000); so as not to cause infinite loop to refresh
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'/><label>1☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2)'/><label>2☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3)'/><label>3☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4)'/><label>4☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5)'/><label>5☆</label>
+              </fieldset>";// scrapped refresh setTimeout(function() {ajaxrequest()}, 1000); called ajaxrequest in responseRecieved
         echo "</form>";        
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
-        echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a><br>";  // refreshs searchresults after 1s, I imagine this is bad practice but it works
+        echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a><br>";  
         
         //'showproduct("variable1","variable2")'
         $row = $results->fetch();
@@ -62,7 +82,7 @@ else
 }
 }
 //print_r($con->errorInfo()); //errorInfo() returns an array
-//print_r() prints the entire contents of an array
+//print_r() //prints the entire contents of an array
 
 //https://dev.mysql.com/doc/refman/5.7/en/insert-on-duplicate.html
 
