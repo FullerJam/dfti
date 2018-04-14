@@ -17,23 +17,23 @@ if($row2 != false){
     //echo "You've already rated this item <br>"; //previously used for debugging
     //echo "product id: ".$row2["productID"]."<br>user: ".$row2["username"]."<br>user rating: ".$row2["userRating"].".";
     $con->query("INSERT INTO userrating (username,productID,userRating) VALUES ('$u','$id','$rating') ON DUPLICATE KEY UPDATE userRating='$rating'");
+    
+
+    $av=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1); // removed +1 due to no new vote being cast // readded cannot divide by zero, result imperfect but close
+    echo $av;
+    $con->query("UPDATE products SET av_raters='$av' WHERE ID='$id'");
 }
 else{
     $con->query("UPDATE products SET num_raters=num_raters +1 WHERE ID='$id'");
-    
-    $results3=$con->query("SELECT * FROM products WHERE ID='$id'");
-    $row3=$results3->fetch();
-    $results4=$con->query("SELECT * FROM userrating WHERE productID='$id'AND username='$u'");
-    $row4=$results4->fetch();
-
-    
-    $av=(($row["av_raters"]*$row3["num_raters"])+$row4["userRating"])/($row3["num_raters"]); // removed +1 due to new db connection
+    $con->query("INSERT INTO userrating (username,productID,userRating) VALUES ('$u','$id','$rating') ON DUPLICATE KEY UPDATE userRating='$rating'");
+     
+    $av=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1);
     echo $av;
     $con->query("UPDATE products SET av_raters='$av' WHERE ID='$id'");
 }
 
 
-print_r($con->errorInfo());
+//print_r($con->errorInfo());
 
 
 ?>

@@ -162,6 +162,8 @@
         document.getElementById("shelves").style.display='none';
     }
 
+
+
     function basketOnLoad(){
         // Create the XMLHttpRequest variable.
         var xhr2 = new XMLHttpRequest();
@@ -249,8 +251,8 @@
 
         <nav>
             <ul>
-                <li><a href="#" onclick="showShelves()">Show all products</a></li>
-                <li><a href="#" onclick="hideShelves()">Hide products</a></li>
+                <li><a href="#" onclick="showShelves()">+ProductList</a></li>
+                <li><a href="#" onclick="hideShelves()">-ProductList</a></li>
                 <li><a href="#" onclick="ajaxrequest()">Refresh results</a></li>
                 <li><a href='adminportal.php'>Admin portal</a></li>
                 <li><a href="logout.php">Logout</a></li>
