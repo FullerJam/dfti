@@ -4,11 +4,11 @@
             if ( !isset ($_SESSION["ssuser"]))
             {
                 header( "refresh:3;url=login.html" );
-                echo "You're not logged in. Go away!";
+                echo "<body>You're not logged in. Go away!</body>";
             }
             else
             {
-                echo "You are logged in as ".$_SESSION["ssuser"]; 
+                echo "<body>You are logged in as ".$_SESSION["ssuser"]."</body>"; 
                 
               ?>  
 
@@ -59,7 +59,7 @@
             float:right;
         }
         #search{
-            margin:20px 0 20px 0;
+            margin:20px 0 5px 0;
             display:block;
             height:30px;
         }
@@ -72,13 +72,14 @@
             width:490px;
         }
         nav ul{
-            list-style-type: none;
-            padding: 0;
+            list-style-type:none;
+            padding:0;
             width:490px;
         }
-        nav li {
+        nav li{
             float: left;
             padding:0;
+            outline:solid;
         }
         li{
             width:25%;

@@ -77,7 +77,7 @@ else
         echo "</form>";        
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/><br>";
-        echo "<a href='javascript:void(null);' onclick='atb(".$row["ID"].")'> Add to Basket</a><br><br>"; 
+        echo "<a href='javascript:void(null);' onclick='atb(".$row["ID"].")'> Add to Basket</a><br>"; 
         echo "------------------"; 
         //javascript:void(null); cancels default action for link stopping page from scrolling to top
         //'showproduct("variable1","variable2")'
