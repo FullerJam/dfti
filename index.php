@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    
     <style type='text/css'>
         body { 
             font-family: Calibri, DejaVu Sans, sans-serif; 
@@ -27,16 +28,32 @@
         #stars{
             color:#a17f1a;
         }
-
+        #qty{
+            margin-bottom:5px;
+        }
         #response { 
-            background-color: #b2ffaf;
+            background-color:#b2ffaf;
             width:470px;
             padding:10px;
-            }
+            outline:solid;
+        }
+        #response a{
+            outline:solid;
+            text-decoration:none;
+            color:black;
+            background-color:#EFFF00;
+        }
         #basket {
             background-color: #EFFF00;
             width:470px;
             padding:10px;
+            outline:solid;
+        }
+        #basket a{
+            outline:solid;
+            text-decoration:none;
+            color:black;
+            background-color:#b2ffaf;
         }
         #link {
             float:right;
@@ -49,22 +66,30 @@
         #shelves{
             margin:5px 0 5px 0;
             background-color: #ff69b4;
-            width:470px;
+            width:490px;
+        }
+        nav{
+            width:490px;
         }
         nav ul{
             list-style-type: none;
             padding: 0;
+            width:490px;
         }
         nav li {
             float: left;
+            padding:0;
         }
-
-
+        li{
+            width:25%;
+        }
         nav li a {
             display: block;
             color: black;
-            padding: 10px 20px;
+            padding: 10px;
+            padding-right:10px;
             text-decoration: none;
+            text-align:center;
             background-color: #b2ffaf;
         }
 
@@ -81,7 +106,12 @@
             padding-right: 5px;            
         }
         
-        
+        #purchase {
+            margin-top:10px;
+        }
+        h1{
+            text-align:center;
+        }
 
         /*intense css
 
@@ -245,26 +275,23 @@
 
     <div class="wrapper">
 
-        <header>
-            <h1>SOLENT GENERAL ST0RES</h1>
-        </header>
-
+    
         <nav>
+            <h1>SOLENT ST0RES</h1>
             <ul>
                 <li><a href="#" onclick="showShelves()">+ProductList</a></li>
                 <li><a href="#" onclick="hideShelves()">-ProductList</a></li>
-                <li><a href="#" onclick="ajaxrequest()">Refresh results</a></li>
-                <li><a href='adminportal.php'>Admin portal</a></li>
+                <li><a href='adminportal.php'>Admin Area</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
         <br><br>
-        <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()"></br>
+        <input type="text" id="search" name="search" placeholder="Search.." onkeyup="ajaxrequest()">
         <div id="shelves"></div>
         <div id="response"></div>
         <h2>Basket</h2>
         <div id="basket"></div>
-
+        <button id="purchase"onclclick="purchase()">Purchase</button>
     </div> <!-- wrapper end -->
 
 

@@ -60,7 +60,8 @@ else
         echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
         echo " Quantity: " .$row["qty"]. "<br/>" ;  
         echo " Item total: ".$qtyprice.".<br/>";
-        echo "<a href='#' onclick='rfb(".$row["ID"].");ajaxrequest();'>Remove from basket</a>"; 
+        echo "<a href='javascript:void(null);' onclick='rfb(".$row["ID"].");'>Remove from basket</a>"; 
+        //javascript:void(null); cancels default action for link stopping page from scrolling to top
         
     
         $row = $results->fetch();

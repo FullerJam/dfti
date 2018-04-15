@@ -53,9 +53,9 @@ else{
 
     $av=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1);
     echo $av;
-    $averageupdate=$con->query("UPDATE products SET av_raters=? WHERE ID=?");
+    $averageupdate=$con->prepare("UPDATE products SET av_raters=? WHERE ID=?");
     $averageupdate->bindParam(1,$av);
-    $averageupdate->bindParam(1,$id);
+    $averageupdate->bindParam(2,$id);
     $averageupdate->execute();
 }
 

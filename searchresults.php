@@ -68,7 +68,7 @@ else
         echo "<fieldset class='rating'>
               <legend>Rate this product</legend>
               <input type='hidden' value=".$row["ID"]."> 
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'/><label>1☆</label>
+              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'/><label>1☆</label> 
               <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2)'/><label>2☆</label>
               <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3)'/><label>3☆</label>
               <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4)'/><label>4☆</label>
@@ -76,9 +76,10 @@ else
               </fieldset>";// scrapped refresh setTimeout(function() {ajaxrequest()}, 1000); called ajaxrequest in responseRecieved
         echo "</form>";        
         echo "<label>Amount </label>";
-        echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/>";
-        echo "<a href='#' onclick='atb(".$row["ID"].")'>Add to Basket</a><br>";  
-        
+        echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/><br>";
+        echo "<a href='javascript:void(null);' onclick='atb(".$row["ID"].")'> Add to Basket</a><br><br>"; 
+        echo "------------------"; 
+        //javascript:void(null); cancels default action for link stopping page from scrolling to top
         //'showproduct("variable1","variable2")'
         $row = $results->fetch();
        

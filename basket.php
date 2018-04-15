@@ -18,7 +18,7 @@ if ($agelimit>0){
     $results0=$con->prepare("SELECT dayofbirth, monthofbirth ,yearofbirth FROM users WHERE username=?");
     //$results0=$con->query("SELECT (CURDATE()-(dayofbirth, monthofbirth ,yearofbirth)) FROM users WHERE username='$u'");
     $results0->bindParam(1,$u);
-    $results->execute();
+    $results0->execute();
 
     $row0=$results0->fetch();
 
@@ -89,7 +89,7 @@ if ($agelimit>0){
                     echo " Price: ".$row2["price"]."<br/> ";
                     echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                     echo " Quantity: " .$row["qty"]. "<br/>" ;  
-                    echo " Item total: ".$qtyprice."<br/>";
+                    echo " Item total: ".$qtyprice."<br><br>";
                     echo "<a href='#' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; //onclick="doSomething();doSomethingElse();"
                     
                 
