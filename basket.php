@@ -32,7 +32,7 @@ if ($agelimit>0){
     $age = floor($difference / 31556926); // calculates age of difference value by dividing by number of seconds in a year, floor removes decimal places
     
     if($age < $agelimit){
-        echo "You are below the required age to purchase this product";
+        echo "<p id='alert'>You are below the required age to purchase this product</p>";
        // DIDNT WORK -- echo "<script type='text/javascript'>alert('You are below the required age to purchase this product')</script>"
     }else{
 
@@ -44,7 +44,7 @@ if ($agelimit>0){
         $row=$stocklevel->fetch();
 
         if ($qty>$row["stocklevel"]){
-            echo "Not enough stock to satisfy your order, ".$row["stocklevel"]." items left in stock.";
+            echo "<p id='alert'>Not enough stock to satisfy your order, ".$row["stocklevel"]." items left in stock.<p>";
         }else{
             //minus qty requested from stock
             $minusq=$con->prepare("UPDATE products SET stocklevel=stocklevel-? WHERE ID=?");

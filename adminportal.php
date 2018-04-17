@@ -1,15 +1,4 @@
-<?php
-session_start();
-// Test that the authentication session variable exists
 
-if ($_SESSION["isadmin"] == 0){ //had to be == not sure why, research.
-    header("refresh:4 url=index.html");
-    echo "Area restricted, admin access only.";
-    echo "<h5><a href='index.php'>Back to store</a></h5>";
-}
-   
-else{
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +17,9 @@ else{
             background-color: #b2ffaf;
             width:500px;
             padding:10px;
+        }
+        body { 
+            font-family:Calibri, DejaVu Sans, sans-serif; 
         }
 
     </style>
@@ -75,6 +67,17 @@ else{
     </script>
 </head>
 <body>
+<?php
+session_start();
+// Test that the authentication session variable exists
+
+if ($_SESSION["isadmin"] == 0){ //had to be == not sure why, research.
+    echo "<body>Area restricted, admin access only.</body>";
+    echo "<body><h5><a href='index.php'>Back to store</a></h5></body>";
+}
+   
+else{
+?>
     
     <div id="wrapper">
         <h1>ADMIN PORTAL</h1>
