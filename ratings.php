@@ -21,25 +21,35 @@ $results2->bindParam(2,$u);
 $results2->execute();
 
 $row2=$results2->fetch();
+if(!isset($_GET["ID"])){
+    echo "<br>";
+    echo "<strong>You haven't provided any rated values for a product</strong>";
+}
+else if($row2 != false){
+    
+    
+   // echo "<p>text to check if statement running</p>  <script type='text/javascript'>console.log('rated already');</script>";
+   // echo '<script type="text/javascript">alert("hello!");</script>';
 
-if($row2 != false){
-    //echo "You've already rated this item <br>"; //previously used for debugging
     //echo "product id: ".$row2["productID"]."<br>user: ".$row2["username"]."<br>user rating: ".$row2["userRating"].".";
-    $insrating=$con->prepare("INSERT INTO userrating (username,productID,userRating) VALUES (?,?,?) ON DUPLICATE KEY UPDATE userRating=?");
+    
+    /*$insrating=$con->prepare("INSERT INTO userrating (username,productID,userRating) VALUES (?,?,?) ON DUPLICATE KEY UPDATE userRating=?");
     $insrating->bindParam(1,$u);
     $insrating->bindParam(2,$id);
     $insrating->bindParam(3,$rating);
     $insrating->bindParam(4,$rating);
     $insrating->execute();
-
-    $av=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1); // removed +1 due to no new vote being cast // readded cannot divide by zero, result imperfect but close
-    echo $av;
+    
+   
+    $preAv=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1);
+    
+    echo "maths:  ((avgraters ".$row["av_raters"]."* numraters ".$row["num_raters"].")+ current rating ".$rating.")/( num raters".$row["num_raters"].")(- avgraters ".$row["av_raters"].")";
     $averages=$con->prepare("UPDATE products SET av_raters=? WHERE ID=?");
-    $averages->bindParam(1,$av);
+    $averages->bindParam(1,$preAv);
     $averages->bindParam(2,$id);
-    $averages->execute();
-}
-else{
+    $averages->execute();*/
+    echo 0;
+}else{
     $updateraters=$con->prepare("UPDATE products SET num_raters=num_raters +1 WHERE ID=?");
     $updateraters->bindParam(1,$id);
     $updateraters->execute();
@@ -52,7 +62,7 @@ else{
     $insrating2->execute();
 
     $av=(($row["av_raters"]*$row["num_raters"])+$rating)/($row["num_raters"]+1);
-    echo $av;
+    echo "maths: ((".$row["av_raters"]."*".$row["num_raters"].")+".$rating.")/(".$row["num_raters"].")+1";
     $averageupdate=$con->prepare("UPDATE products SET av_raters=? WHERE ID=?");
     $averageupdate->bindParam(1,$av);
     $averageupdate->bindParam(2,$id);

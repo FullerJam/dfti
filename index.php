@@ -5,6 +5,7 @@
             {
                 header( "refresh:3;url=login.html" );
                 echo "<body>You're not logged in. Go away!</body>";
+                #hash can be used for comment too like python
             }
             else
             {
@@ -30,7 +31,7 @@
             <ul>
                 <li><a href="#" onclick="showShelves()">+ProductList</a></li>
                 <li><a href="#" onclick="hideShelves()">-ProductList</a></li>
-                <li><a href='adminportal.php'>Admin Area</a></li>
+                <li><a href="adminportal.php">Admin Area</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>

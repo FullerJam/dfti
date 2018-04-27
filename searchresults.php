@@ -7,7 +7,7 @@ if (strlen($search)<=1){ //checks string length is more than or equal to 1
     echo "Please enter more than one character";
 }
 else {
-$searchbp="$search%";//converts varibale for use in bind param
+$searchbp="%$search%";//converts varibale for use in bind param
 $results = $con->prepare("SELECT * FROM products WHERE name LIKE ?"); // delivers all results similar to the string so far using wildcard %
 $results->bindParam(1,$searchbp);
 $results->execute();
@@ -68,17 +68,17 @@ else
         echo "<fieldset class='rating'>
               <legend>Rate this product</legend>
               <input type='hidden' value=".$row["ID"]."> 
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",1)'/><label>1☆</label> 
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",2)'/><label>2☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",3)'/><label>3☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",4)'/><label>4☆</label>
-              <input type='radio' name='radAnswer'id='rating' onclick='sendRating(".$row["ID"].",5)'/><label>5☆</label>
+              <input type='radio' name='radAnswer' onclick='sendRating(".$row["ID"].",1)'/><label>1☆</label> 
+              <input type='radio' name='radAnswer' onclick='sendRating(".$row["ID"].",2)'/><label>2☆</label>
+              <input type='radio' name='radAnswer' onclick='sendRating(".$row["ID"].",3)'/><label>3☆</label>
+              <input type='radio' name='radAnswer' onclick='sendRating(".$row["ID"].",4)'/><label>4☆</label>
+              <input type='radio' name='radAnswer' onclick='sendRating(".$row["ID"].",5)'/><label>5☆</label>
               </fieldset>";// scrapped refresh setTimeout(function() {ajaxrequest()}, 1000); called ajaxrequest in responseRecieved
         echo "</form>";        
         echo "<label>Amount </label>";
         echo "<input type='number' value='1' id='qty".$row["ID"]."' min='1' max='200'><br/><br>";
         echo "<a href='javascript:void(null);' onclick='atb(".$row["ID"].")'> Add to Basket</a><br>"; 
-        echo "------------------"; 
+        echo "-------------------"; 
         //javascript:void(null); cancels default action for link stopping page from scrolling to top
         //'showproduct("variable1","variable2")'
         $row = $results->fetch();

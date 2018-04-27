@@ -22,6 +22,7 @@ body {
     text-decoration:none;
     color:black;
     background-color:#EFFF00;
+    box-shadow: 3px 5px 2px #474747;
 }
 #basket {
     background-color:#EFFF00;
@@ -34,9 +35,7 @@ body {
     text-decoration:none;
     color:black;
     background-color:#b2ffaf;
-}
-#link {
-    float:right;
+    box-shadow: 3px 5px 2px #474747;
 }
 #search{
     margin:20px 0 5px 0;
@@ -95,31 +94,3 @@ fieldset{
     padding:0;
 }
 /*modal*/
-#purchase{
-    padding:5px;
-}
-.backdrop {
-    display:none;
-    position:fixed;
-    background:rgba(0,0,0,0.5);
-    top:0;
-    height:100vh;
-    width:100vw;
-    z-index:1;
-}
-.modal{
-    display:none;
-    position:fixed;
-    background:white;
-    padding:10px;
-    width:260px;
-    top:100px;
-    left:calc(50% - 140px);
-    z-index:1;
-}
-@media (min-width:400px){
-    .modal{
-        width:360px;
-        left:calc(50% - 190px;);
-    }
-}

@@ -38,7 +38,8 @@ $row = $results->fetch();
                 echo " Age restriction: ".$row2["agelimit"]."<br/> "; 
                 echo " Quantity: " .$row["qty"]. "<br/>" ;  
                 echo " Item total: ".$qtyprice."<br/><br>";
-                echo "<a href='javascript:void(null);' onclick='rfb(".$row["ID"].")'>Remove from basket</a>"; // refreshs search results after 1s, I imagine this is bad practice but it works
+                echo "<a href='javascript:void(null);' onclick='rfb(".$row["ID"].")'>Remove from basket</a><br>"; // refreshs search results after 1s, I imagine this is bad practice but it works
+                echo "----------------------------"; 
                 //javascript:void(null); cancels default action for link stopping page from scrolling to top
             
             

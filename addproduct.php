@@ -10,7 +10,7 @@
     $stocklvl = htmlentities($_POST["stocklvl"]);
     $ageres = htmlentities($_POST["ageres"]);
 
-    $insert=$con->prepare("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUE (?, ?, ?, ?, ?, ?);");
+    $insert=$con->prepare("INSERT INTO products (name, manufacturer, description, price, stocklevel, agelimit) VALUES (?, ?, ?, ?, ?, ?);");
     $insert->bindParam(1,$prodname);
     $insert->bindParam(2,$manu);
     $insert->bindParam(3,$desc);

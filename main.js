@@ -62,7 +62,7 @@ function atb(id){
     var qty = document.getElementById('qty'+id).value;
     var agelimit = parseInt(document.getElementById('agelimit'+id).innerHTML);
      //use innerHTML to target values in html
-    console.log(agelimit);
+    //console.log(agelimit);
     xhr2.open('GET', 'basket.php?ID='+id+'&qty='+qty+'&agelimit='+agelimit);
     //console.log(id,qty); uncomment to see if values are being passed through
     xhr2.addEventListener ("load", responseAlert);
@@ -98,6 +98,10 @@ function responseReceived(e){
 }
 function responseRating(e){
     document.getElementById('response').innerHTML = e.target.responseText;
+    console.log("response text:" + e.target.responseText + ".");
+    if(e.target.responseText == "0"){ //value echo'd in ratings if statement.
+        alert("You've rated this product already.\nFeel free to rate another product.");
+    }
     ajaxrequest();
 }
 function responseAlert(e){
@@ -108,15 +112,3 @@ function responseAlert(e){
 function responseShelves(e){
     document.getElementById('shelves').innerHTML = e.target.responseText;
 }
-
-//purchase modal below
-
-var purchase = document.querySelector('#purchase');
-    var backdrop = document.querySelector('.backdrop');
-    var modal = document.querySelector('.modal');
-
-function openModal(){
-    backdrop.style.display = 'block';
-    modal.style.display = 'block';
-}
-
